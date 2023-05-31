@@ -91,5 +91,18 @@ namespace CubeIntersection.Test
 
             Assert.That(cd.ExtractCollisions()[0].Volume(), Is.EqualTo(48));
         }
+
+        [Test]
+        public void CheckCollisionBetweenAlternatedCubes()
+        {
+            Cube cube1 = new Cube(10, 0, 0, 4);
+            Cube cube2 = new Cube(-10, 0, 0, 6);
+            Cube cube3 = new Cube(11, 0, 0, 5);
+
+            CollisionDetector cd = new CollisionDetector(
+                new ICollisionObject3D[] { cube1, cube2, cube3 });
+
+            Assert.That(cd.CollisionDetected(), Is.True);
+        }
     }
 }
