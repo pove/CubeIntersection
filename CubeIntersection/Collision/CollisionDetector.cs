@@ -23,10 +23,16 @@ namespace CubeIntersection.Collision
 
         public bool CollisionDetected()
         {
+            if (Objects3D.Count < 2)
+                return false;
+
             for (int i = 0; i < Objects3D.Count - 1; i++)
             {
-                if (Objects3D[i].Collides(Objects3D[i + 1]))
-                    return true;
+                for (int j = i + 1; j < Objects3D.Count; j++)
+                {
+                    if (Objects3D[i].Collides(Objects3D[j]))
+                        return true;
+                }
             }
 
             return false;
@@ -36,12 +42,18 @@ namespace CubeIntersection.Collision
         {
             IList<ICollisionObject3D> collisionObjects = new List<ICollisionObject3D>();
 
+            if (Objects3D.Count < 2)
+                return collisionObjects;
+
             for (int i = 0; i < Objects3D.Count - 1; i++)
             {
-                if (!Objects3D[i].Collides(Objects3D[i + 1]))
-                    continue;
+                for (int j = i + 1; j < Objects3D.Count; j++)
+                {
+                    if (!Objects3D[i].Collides(Objects3D[j]))
+                        continue;
 
-                collisionObjects.Add(Objects3D[i].ExctractCollision(Objects3D[i + 1]));
+                    collisionObjects.Add(Objects3D[i].ExctractCollision(Objects3D[j]));
+                }
             }
 
             return collisionObjects;
