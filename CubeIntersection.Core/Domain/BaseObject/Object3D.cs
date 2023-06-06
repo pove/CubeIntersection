@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
+using CubeIntersection.Core.Abstractions.Object3D;
 
-namespace CubeIntersection.Model
+namespace CubeIntersection.Core.Domain.BaseObject
 {
     public abstract class Object3D : IObject3D
     {
@@ -25,8 +26,8 @@ namespace CubeIntersection.Model
 
         public override string ToString()
         {
-            return 
-                $"({Position.X} {Position.Y} {Position.Z}) " 
+            return
+                $"({Position.X} {Position.Y} {Position.Z}) "
                 + Dimension.ToString();
         }
     }

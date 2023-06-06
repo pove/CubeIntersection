@@ -1,10 +1,10 @@
-﻿using CubeIntersection.Model;
+﻿using CubeIntersection.Core.Domain.Boundaries;
 
-namespace CubeIntersection.Collision
+namespace CubeIntersection.Core.Application.Collision
 {
     public static class BoundaryCollision
     {
-        public static bool Collides(Boundary bound1, Boundary bound2)
+        public static bool Collides(Boundary3D bound1, Boundary3D bound2)
         {
             return bound1.Left < bound2.Right
                 && bound1.Right > bound2.Left
@@ -14,9 +14,9 @@ namespace CubeIntersection.Collision
                 && bound1.Front > bound2.Behind;
         }
 
-        public static Boundary ExtractCollision(Boundary bound1, Boundary bound2)
+        public static Boundary3D ExtractCollision(Boundary3D bound1, Boundary3D bound2)
         {
-            Boundary collision = new Boundary();
+            Boundary3D collision = new Boundary3D();
 
             collision.Left = Math.Max(bound1.Left, bound2.Left);
             collision.Right = Math.Min(bound1.Right, bound2.Right);

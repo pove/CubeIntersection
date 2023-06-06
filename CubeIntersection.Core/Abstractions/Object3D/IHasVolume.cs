@@ -1,5 +1,4 @@
-﻿
-namespace CubeIntersection.Model
+﻿namespace CubeIntersection.Core.Abstractions.Object3D
 {
     public interface IHasVolume
     {

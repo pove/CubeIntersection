@@ -1,5 +1,5 @@
-﻿using CubeIntersection.Model;
-using CubeIntersection.Collision;
+﻿using CubeIntersection.Core.Domain.Shapes;
+using CubeIntersection.Application.Collision;
 
 Console.WriteLine("Enter number of cubes:");
 

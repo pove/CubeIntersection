@@ -1,5 +1,7 @@
-﻿
-namespace CubeIntersection.Model
+﻿using CubeIntersection.Core.Abstractions.Boundary;
+using CubeIntersection.Core.Abstractions.Object3D;
+
+namespace CubeIntersection.Core.Abstractions.Collision
 {
     public interface ICollisionObject3D : IObject3D, IHasBoundary
     {

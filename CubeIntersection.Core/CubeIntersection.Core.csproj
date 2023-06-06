@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -13,10 +13,5 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <WarningLevel>6</WarningLevel>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Model\CollisionObject.cs" />
-    <Compile Remove="Model\Position3D.cs" />
-  </ItemGroup>
 
 </Project>

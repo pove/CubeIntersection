@@ -1,7 +1,10 @@
-﻿using CubeIntersection.Collision;
+﻿using CubeIntersection.Core.Abstractions.Collision;
+using CubeIntersection.Core.Application.Collision;
+using CubeIntersection.Core.Domain.BaseObject;
+using CubeIntersection.Core.Domain.Boundaries;
 using System.Numerics;
 
-namespace CubeIntersection.Model
+namespace CubeIntersection.Core.Domain.Shapes
 {
     public class Cuboid : BoundaryObject3D, ICollisionObject3D
     {
@@ -39,7 +42,7 @@ namespace CubeIntersection.Model
 
         public ICollisionObject3D ExctractCollision(ICollisionObject3D otherCollisionObject)
         {
-            Boundary boundary = BoundaryCollision.ExtractCollision(
+            Boundary3D boundary = BoundaryCollision.ExtractCollision(
                    Boundary, otherCollisionObject.Boundary);
 
             Dimension3D dimension = new Dimension3D()

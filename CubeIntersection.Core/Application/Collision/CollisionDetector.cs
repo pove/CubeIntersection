@@ -1,6 +1,6 @@
-﻿using CubeIntersection.Model;
+﻿using CubeIntersection.Core.Abstractions.Collision;
 
-namespace CubeIntersection.Collision
+namespace CubeIntersection.Application.Collision
 {
     public class CollisionDetector
     {

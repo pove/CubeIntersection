@@ -1,10 +1,12 @@
 ﻿using System.Numerics;
+using CubeIntersection.Core.Abstractions.Boundary;
+using CubeIntersection.Core.Domain.BaseObject;
 
-namespace CubeIntersection.Model
+namespace CubeIntersection.Core.Domain.Boundaries
 {
     public abstract class BoundaryObject3D : Object3D, IHasBoundary
     {
-        public Boundary Boundary { get; } = new Boundary();
+        public Boundary3D Boundary { get; } = new Boundary3D();
 
         public BoundaryObject3D(Vector3 position, Dimension3D dimension) : base(position, dimension)
         {

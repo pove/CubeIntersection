@@ -1,7 +1,6 @@
-﻿
-namespace CubeIntersection.Model
+﻿namespace CubeIntersection.Core.Domain.Boundaries
 {
-    public class Boundary
+    public class Boundary3D
     {
         public float Left { get; set; }
 

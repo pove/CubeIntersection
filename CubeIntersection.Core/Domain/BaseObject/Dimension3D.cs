@@ -1,9 +1,8 @@
-﻿
-namespace CubeIntersection.Model
+﻿namespace CubeIntersection.Core.Domain.BaseObject
 {
     public struct Dimension3D
     {
-        public Dimension3D(float length, float height, float width) 
+        public Dimension3D(float length, float height, float width)
         {
             Length = length;
             Height = height;

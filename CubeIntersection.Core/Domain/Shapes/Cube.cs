@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CubeIntersection.Core.Domain.BaseObject;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using CubeIntersection.Model;
 
-namespace CubeIntersection.Model
+namespace CubeIntersection.Core.Domain.Shapes
 {
     public class Cube : Cuboid
     {

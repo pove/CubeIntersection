@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubeIntersection", "CubeIntersection\CubeIntersection.csproj", "{C5ED3448-6DF3-425F-B296-380760D247B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CubeIntersection.Core", "CubeIntersection.Core\CubeIntersection.Core.csproj", "{C5ED3448-6DF3-425F-B296-380760D247B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubeIntersection.App", "CubeIntersection.App\CubeIntersection.App.csproj", "{92BC8A56-9422-42FD-A398-C4582C0312E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CubeIntersection.Console", "CubeIntersection.Console\CubeIntersection.Console.csproj", "{92BC8A56-9422-42FD-A398-C4582C0312E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CubeIntersection.Test", "CubeIntersection.Test\CubeIntersection.Test.csproj", "{2AA32463-75FE-4D85-B471-4BA782E7CC30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CubeIntersection.Test", "CubeIntersection.Test\CubeIntersection.Test.csproj", "{2AA32463-75FE-4D85-B471-4BA782E7CC30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
