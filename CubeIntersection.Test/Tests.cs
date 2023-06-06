@@ -1,14 +1,63 @@
-using CubeIntersection.Model;
-using CubeIntersection.Collision;
+using CubeIntersection.Application.Collision;
+using CubeIntersection.Core.Abstractions.Collision;
+using CubeIntersection.Core.Domain.Shapes;
 
 namespace CubeIntersection.Test
 {
-    //[SetUpFixture]
+    [TestFixture]
     public class Tests
     {
         [SetUp]
         public void Setup()
         {
+        }
+
+        private enum TestParameter { Cube1, Cube2, CuboidString, Volume };
+
+        private static IEnumerable<TestCaseData> CubesNotCollide()
+        {
+            yield return new TestCaseData(new Cube(0, 0, 0, 4), new Cube(5, 0, 0, 6));
+            yield return new TestCaseData(new Cube(-3, -6, -10, 10), new Cube(8, 5, 12, 6));
+        }
+
+        private static IEnumerable<TestCaseData> CubesCollideWithCuboidAndVolume()
+        {
+            yield return new TestCaseData(new Cube(0, 0, 0, 4), new Cube(2, 0, 4, 6), "(0,5 0 1,5) (L:3 H:4 W:1)", 12);
+            yield return new TestCaseData(new Cube(10, 10, 10, 10), new Cube(5, 5, 5, 5), "(6,25 6,25 6,25) (L:2,5 H:2,5 W:2,5)", 15.625f);
+            yield return new TestCaseData(new Cube(100, 100, 100, 50), new Cube(120, 120, 120, 20), "(117,5 117,5 117,5) (L:15 H:15 W:15)", 3375);
+            yield return new TestCaseData(new Cube(-3, -6, -10, 10), new Cube(-5, -10, -8, 15), "(-3 -6,75 -10) (L:10 H:8,5 W:10)", 850);
+        }
+
+        private static IEnumerable<TestCaseData> CubesCollide()
+        {
+            foreach (var item in CubesCollideWithCuboidAndVolume())
+            {
+                yield return new TestCaseData(
+                    item.Arguments[(int)TestParameter.Cube1],
+                    item.Arguments[(int)TestParameter.Cube2]);
+            }
+        }
+
+        private static IEnumerable<TestCaseData> CubesCollideWithCuboid()
+        {
+            foreach (var item in CubesCollideWithCuboidAndVolume())
+            {
+                yield return new TestCaseData(
+                    item.Arguments[(int)TestParameter.Cube1],
+                    item.Arguments[(int)TestParameter.Cube2],
+                    item.Arguments[(int)TestParameter.CuboidString]);
+            }
+        }
+
+        private static IEnumerable<TestCaseData> CubesCollideWithVolume()
+        {
+            foreach (var item in CubesCollideWithCuboidAndVolume())
+            {
+                yield return new TestCaseData(
+                    item.Arguments[(int)TestParameter.Cube1],
+                    item.Arguments[(int)TestParameter.Cube2],
+                    item.Arguments[(int)TestParameter.Volume]);
+            }
         }
 
         [Test]
@@ -43,23 +92,18 @@ namespace CubeIntersection.Test
             Assert.That(cube.Volume, Is.EqualTo(120));
         }
 
-        [Test]
-        public void CheckNoCollisionBetweenCubes()
+        [Test, TestCaseSource(nameof(CubesNotCollide))]
+        public void CheckNoCollisionBetweenCubes(Cube cube1, Cube cube2)
         {
-            Cube cube1 = new Cube(0, 0, 0, 4);
-            Cube cube2 = new Cube(5, 0, 0, 6);
-
             CollisionDetector cd = new CollisionDetector(
                 new ICollisionObject3D[] { cube1, cube2 });
 
             Assert.That(cd.CollisionDetected(), Is.False);
         }
 
-        [Test]
-        public void CheckCollisionBetweenCubes()
+        [Test, TestCaseSource(nameof(CubesCollide))]
+        public void CheckCollisionBetweenCubes(Cube cube1, Cube cube2)
         {
-            Cube cube1 = new Cube(0, 0, 0, 4);
-            Cube cube2 = new Cube(2, 0, 4, 6);
 
             CollisionDetector cd = new CollisionDetector(
                 new ICollisionObject3D[] { cube1, cube2 });
@@ -67,29 +111,23 @@ namespace CubeIntersection.Test
             Assert.That(cd.CollisionDetected(), Is.True);
         }
 
-        [Test]
-        public void ExtractCuboidBetweenCubesCollided()
+        [Test, TestCaseSource(nameof(CubesCollideWithCuboid))]
+        public void ExtractCuboidBetweenCubesCollided(Cube cube1, Cube cube2, string cuboidstring)
         {
-            Cube cube1 = new Cube(0, 0, 0, 4);
-            Cube cube2 = new Cube(2, 0, 0, 6);
-
             CollisionDetector cd = new CollisionDetector(
                 new ICollisionObject3D[] { cube1, cube2 });
 
             Assert.That(cd.ExtractCollisions()[0].ToString(), 
-                Is.EqualTo("(0,5 0 0) (L:3 H:4 W:4)"));
+                Is.EqualTo(cuboidstring));
         }
 
-        [Test]
-        public void VolumeBetweenCubesCollided()
+        [Test, TestCaseSource(nameof(CubesCollideWithVolume))]
+        public void VolumeBetweenCubesCollided(Cube cube1, Cube cube2, float volume)
         {
-            Cube cube1 = new Cube(0, 0, 0, 4);
-            Cube cube2 = new Cube(2, 0, 0, 6);
-
             CollisionDetector cd = new CollisionDetector(
                 new ICollisionObject3D[] { cube1, cube2 });
 
-            Assert.That(cd.ExtractCollisions()[0].Volume(), Is.EqualTo(48));
+            Assert.That(cd.ExtractCollisions()[0].Volume(), Is.EqualTo(volume));
         }
 
         [Test]
